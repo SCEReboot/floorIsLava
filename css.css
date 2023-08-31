@@ -1,0 +1,15 @@
+body{margin: 0;
+padding: 0;}
+
+
+#tablero{width: 600px;
+height: 900px;
+background-color: rgb(0, 0, 0);
+margin: 40px auto;
+position: relative;
+padding: 0;
+border-radius: 5px;
+}
+
+
+
