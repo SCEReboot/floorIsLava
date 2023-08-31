@@ -1,41 +1,48 @@
+import {Player} from "./player.js"
 var board = document.getElementById("board")
 var player1 = new Player(250, 800);
 
-function Player(x, y) {
-    this.x = x
-    this.y = y
-    this.direction = 0
-    this.sprite
-
-
-    this.insertPlayer = function () {
-        var newPlayer = document.createElement("div")
-        newPlayer.setAttribute("id", "player")
-        newPlayer.style.left = this.x + "px"
-        newPlayer.style.top = this.y + "px"
-        this.sprite = newPlayer
-        board.appendChild(this.sprite)
-
-    }
-
-    this.move = function () {
-        this.x = this.x + 10 * this.direction
-        this.sprite.style.left = this.x + 'px'
-    }
+if(player1.jumping === true){
+    player1.stopJump
+    clearInterval(timerId)
 }
 
 window.addEventListener('keydown', function (e) {
     switch (e.key) {
         case 'a':
             player1.direction = -1
+            player1.move()
             break
         case 'd':
             player1.direction = 1
+            player1.move()
             break
-    }
-    player1.move()
-})
+        case 'w':
+            player1.direction = -1
+            player1.jump()    
+            break
+            
+    
+}})
+
+
+
+/*  window.addEventListener('keydown', function (event) {
+    if (event.key === 'w') {
+        player1.direction
+    } player1.jump()
+})  */
+
+window.addEventListener("keyup", function(e){
+    if(e.key === 'a' || e.key ==='d') {
+        player1.direction = 0    
+
+    }})
+    
+
+
+
+ 
 
 player1.insertPlayer()
-
 
