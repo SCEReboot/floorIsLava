@@ -21,3 +21,11 @@ border-radius: 5px;
     position: absolute;
 
 }
+
+#platform{
+
+    background-color: green;
+    width: 100px;
+    height:20px;
+    position: absolute;
+}
