@@ -7,7 +7,7 @@ function Player(x, y) {
     this.speed = 5 //velocidad de x,y
     this.speedjump = 10
     this.jumping = false
-    this.speedY = 3
+    this.speedY = 1
     this.gravity = 1.04
     this.height = 100
     this.width = 100
@@ -36,32 +36,44 @@ function Player(x, y) {
     }
 
     this.fall = function (platform) {
-                if ((
-            platform.y + platform.heightP >= self.y &&
-            platform.y <= self.y + self.height &&
-            platform.x + platform.widthP >= self.x &&
-            platform.x <= self.x + self.width
-        )){
-            self.falling = false
-        }
-       
-        if ( self.falling === true) {
-
         
+        /* (self.y + self.height >= platform.y && 
+            self.x + self.width >= platform.x &&
+            self.x < platform.x + platform.width && 
+            self.y + 100 < platform.y && platform.x + 100 &&
+            ) */
 
-        var nextY = self.y + self.speedY + 100
-        if (nextY < 800 && self.speed < 20) {
-            self.speedY *= self.gravity**2
-            self.y = self.y + self.speedY
-            
-        } else if (nextY < 900)  {
-            self.speedY = 20
-            self.y = self.y + self.speedY
-        } 
-        else {
-            self.y = 800
-        } 
-        self.sprite.style.top = self.y + 'px'
+            if (self.x && self.y)
+            if ((true) && (true > jsldnhgh))
+
+
+         if (
+                platform.y + platform.heightP >= self.y  && 
+                platform.y <= self.y + self.height  &&
+                platform.x + platform.widthP >= self.x &&
+                platform.x <= self.x + self.width 
+            ) {
+                self.falling = false
+            }
+      
+
+        if (self.falling === true) {
+
+
+
+            var nextY = self.y + self.speedY + 100
+            if (nextY < 800 && self.speed < 20) {
+                self.speedY *= self.gravity ** 2
+                self.y = self.y + self.speedY
+
+            } else if (nextY < 900) {
+                self.speedY = 20
+                self.y = self.y + self.speedY
+            }
+            else {
+                self.y = 800
+            }
+            self.sprite.style.top = self.y + 'px'
         }
     }
 
