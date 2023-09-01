@@ -11,6 +11,7 @@ function Player(x, y) {
     this.gravity = 1.04
     this.height = 100
     this.width = 100
+    this.falling = true
 
 
     this.insertPlayer = function () { //Funcion para crear al jugador 
@@ -40,9 +41,13 @@ function Player(x, y) {
             platform.y <= self.y + self.height &&
             platform.x + platform.widthP >= self.x &&
             platform.x <= self.x + self.width
-        )) { console.log('out') } 
+        )){
+            self.falling = false
+        }
        
+        if ( self.falling === true) {
 
+        
 
         var nextY = self.y + self.speedY + 100
         if (nextY < 800 && self.speed < 20) {
@@ -57,6 +62,7 @@ function Player(x, y) {
             self.y = 800
         } 
         self.sprite.style.top = self.y + 'px'
+        }
     }
 
     /*  this.jump = function() {
