@@ -1,10 +1,12 @@
-console.log('hola')
-function Platform (x,y){
+
+function Platform (x,y,platforms){
+    var self = this
     this.x = x
     this.y = y
     this.sprite
     this.heightP = 20
     this.widthP = 100 
+    this.speedY = 2
 
     this.insertPlatform = function () { //Funcion para crear  plataforma 
     var newPlatform = document.createElement("div")
@@ -16,17 +18,19 @@ function Platform (x,y){
 
     }
 
-    this.checkCollision = function() {
-       if(
-        this.y + this.heightP <= player1.y &&
-        this.y <= player1.y + player1.height &&
-        this.x + this.widthP >= player1.x &&
-        this.x <= player1.x + player1.widthP
-       )
-       console.log('out') 
-    }
+   this.fallplatform = function () {
+    if (self.y < 880 ) {
+        
+        self.y = self.y + self.speedY
+        self.sprite.style.top = self.y + 'px' 
+   }
+   
 }
 
+
+
+
+}
 
 
 export { Platform }
