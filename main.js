@@ -1,5 +1,6 @@
 var board = document.getElementById("board")
-var player1 = new Player(250,800);
+var player1 = new Player(200, 5);
+var platform = new Platform(199,300)
 
 function Player (x,y){
     this.x = x
