@@ -1,11 +1,13 @@
 import { Player } from "./player.js"
 import { Platform } from "./platform.js"
+
 var board = document.getElementById("board")
 
 var player1 = new Player(200, 5);
-var platform = new Platform(200,300)
+ 
+var platforms = []
 
-platform.insertPlatform()
+
 player1.insertPlayer()// Ejecutamos la funcion que crea al jugador
 
 window.addEventListener('keydown', function (e) { //Cambiamos la direccion dependiendo de la tecla pulsada
@@ -34,20 +36,38 @@ window.addEventListener("keyup", function (e) { //Quitamos direccion si dejamos 
     }
 })
 
+
+function createplatform() {
+  
+
+    var xRandom = Math.floor(Math.random() * 10) * 55   // versión arcade
+    var platform = new Platform(xRandom,0,platforms)
+    platform.insertPlatform()
+    platforms.push(platform)
+    console.log(platform)
+  }
+  
+
 function loop () {
     player1.move()
-    player1.fall(platform)
-    
-
+    for (let i = 0; i < platforms.length; i++) {
+    player1.fall(platforms[i])}
+    //platforms[0].fallplatform()
+    for (let i = 0; i < platforms.length; i++) {
+        platforms[i].fallplatform();
+    }
     
 }
 
 var timerId 
 function start () {
     timerId = setInterval(loop,30)
-   
+    timerId2 = setInterval(createplatform,1500)
 }
 
+
+
 start()
+
 
 

@@ -8,7 +8,7 @@ function Player(x, y) {
     this.speedjump = 10
     this.jumping = false
     this.speedY = 1
-    this.gravity = 1.1
+    this.gravity = 1
     this.height = 50
     this.width = 50
     this.falling = true
@@ -35,17 +35,17 @@ function Player(x, y) {
         }
     }
 
-    this.fall = function (platform) {
+    this.fall = function (platforms) {
        
         if (
-            self.y + self.height <= platform.y && // Colisión con la plataforma solo cuando el player se encuentra por encima del eje y
-            self.x + self.width > platform.x && // Colisión con la plataforma
-            self.x < platform.x + platform.widthP &&
-            self.y + self.height + self.speedY >= platform.y // Colisión con la plataforma en la siguiente posición para que no se pase tuvimos que añadir la velocidad
+            self.y + self.height <= platforms.y && // Colisión con la plataforma solo cuando el player se encuentra por encima del eje y
+            self.x + self.width > platforms.x && // Colisión con la plataforma
+            self.x < platforms.x + platforms.widthP &&
+            self.y + self.height + self.speedY >= platforms.y // Colisión con la plataforma en la siguiente posición para que no se pase tuvimos que añadir la velocidad
            
         ) {
-            self.y = platform.y - self.height;
             
+            self.speedY = 2
             self.falling = false;
         } else {
             self.falling = true;
@@ -69,5 +69,5 @@ function Player(x, y) {
             self.sprite.style.top = self.y + 'px'
         }
     }}
-    
+
 export { Player }
