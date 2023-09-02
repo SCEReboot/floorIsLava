@@ -56,8 +56,7 @@ function loop () {
     for (let i = 0; i < platforms.length; i++) {
         platforms[i].fallplatform();
     }
-    
-}
+}   
 
 var timerId 
 function start () {
