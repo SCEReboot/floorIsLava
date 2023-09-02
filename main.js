@@ -37,6 +37,7 @@ window.addEventListener("keyup", function (e) { //Quitamos direccion si dejamos 
 function loop () {
     player1.move()
     player1.fall(platform)
+    
 
     
 }

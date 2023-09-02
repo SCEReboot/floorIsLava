@@ -1,10 +1,12 @@
 console.log('hola')
 function Platform (x,y){
+    var self = this
     this.x = x
     this.y = y
     this.sprite
     this.heightP = 20
     this.widthP = 100 
+    this.speedY = 3.5
 
     this.insertPlatform = function () { //Funcion para crear  plataforma 
     var newPlatform = document.createElement("div")
@@ -15,6 +17,15 @@ function Platform (x,y){
     board.appendChild(this.sprite)
 
     }
+
+    this.movePlatform = function () {
+        self.y += self.speedY
+        self.sprite.style.top = self.y +'px'
+
+    }     
+       
+    this.timerId = setInterval(this.movePlatform, 50)
+
 
     this.checkCollision = function() {
        if(
