@@ -1,7 +1,8 @@
 import { Player } from "./player.js"
 import { Platform } from "./platform.js"
 var board = document.getElementById("board")
-var player1 = new Player(90.99, 5);
+
+var player1 = new Player(200, 5);
 var platform = new Platform(200,300)
 
 platform.insertPlatform()
