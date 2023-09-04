@@ -21,7 +21,7 @@ window.addEventListener('keydown', function (e) { //Cambiamos la direccion depen
             break
                 
         case 'w':
-            player1.direction = -1
+            player1.jump()
             break
 
     }
@@ -44,22 +44,25 @@ function createplatform() {
     var platform = new Platform(xRandom,0,platforms)
     platform.insertPlatform()
     platforms.push(platform)
-    console.log(platform)
+    
   }
   
 
 function loop () {
-    player1.move()
-    for (let i = 0; i < platforms.length; i++) {
-    player1.fall(platforms[i])}
-    //platforms[0].fallplatform()
+    player1.collision(platforms)
+    player1.moveX()
+    player1.moveY()
+    
+    
     for (let i = 0; i < platforms.length; i++) {
         platforms[i].fallplatform();
     }
     
+    
 }
 
 var timerId 
+var timerId2
 function start () {
     timerId = setInterval(loop,30)
     timerId2 = setInterval(createplatform,1500)

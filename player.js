@@ -8,7 +8,7 @@ function Player(x, y) {
     this.speedjump = 10
     this.jumping = false
     this.speedY = 1
-    this.gravity = 1
+    this.gravity = 1.05
     this.height = 50
     this.width = 50
     this.falling = true
@@ -24,7 +24,7 @@ function Player(x, y) {
 
     }
 
-    this.move = function () {
+    this.moveX = function () {
         self.x = self.x + self.speed * self.direction
         self.sprite.style.left = self.x + 'px'
         if (self.x < 1) {
@@ -35,31 +35,75 @@ function Player(x, y) {
         }
     }
 
-    this.fall = function (platforms) {
-       
-        if (
-            self.y + self.height <= platforms.y && // Colisión con la plataforma solo cuando el player se encuentra por encima del eje y
-            self.x + self.width > platforms.x && // Colisión con la plataforma
-            self.x < platforms.x + platforms.widthP &&
-            self.y + self.height + self.speedY >= platforms.y // Colisión con la plataforma en la siguiente posición para que no se pase tuvimos que añadir la velocidad
-           
-        ) {
-            
+    this.moveY = function() {
+        if(self.falling === true) {
+            self.fall()
+        } else {
+            self.jump()
+        }
+    }
+
+    this.jump = function () { 
+            self.speedY = 1
+            self.y = self.y - 200 
+            self.sprite.style.top = self.y + 'px'
+            self.falling = true
+        
+    }
+
+    this.collision = function (platforms){
+        // self.y + self.height > platform.y && 
+        // self.y + self.height < platform.y + platform.height
+        // self.x > platform.x &&
+        // self.x < platform.x + platform.width &&
+
+        // self.x + self.width < platform.x + platform.width &&  
+        // self.x + self.width > platform.x
+
+
+        console.log(platforms)
+        platforms.forEach(platform => {
+            if (
+             self.falling === true &&
+            self.y + self.height + self.speedY >= platform.y && // Colisión con la plataforma solo cuando el player se encuentra por encima del eje y
+            self.x + self.width > platform.x && // Colisión con la plataforma
+            self.x < platform.x + platform.widthP &&
+            self.y + self.height  <= platform.y + 1  && 
+            self.speedY >= 0 // Colisión con la plataforma en la siguiente posición para que no se pase tuvimos que añadir la velocidad
+        
+
+                    // self.y + self.height > platform.y && 
+                    // self.y + self.height < platform.y + platform.height &&
+                    // self.x > platform.x &&
+                    // self.x < platform.x + platform.width &&
+
+                    // self.x + self.width < platform.x + platform.width &&  
+                    // self.x + self.width > platform.x
+
+
+         ){
             self.speedY = 2
             self.falling = false;
+            self.y = platform.y - self.height
         } else {
             self.falling = true;
-        }
-    console.log(self.y)
+        }  
+        });
+      
 
+    }
+
+    this.fall = function () {
+       
+    
         if (self.falling === true) {
 
             var nextY = self.y + self.speedY + self.height // Calculamos la siguiente posicion para que le de tiempo a parar
-            if (nextY < 800 && self.speed < 20) {
+            if (nextY < 900 && self.speedY < 20) {
                 self.speedY *= self.gravity 
                 self.y = self.y + self.speedY
 
-            } else if (nextY < 900) {
+            } else if( nextY < 900 ) {
                 self.speedY = 20
                 self.y = self.y + self.speedY
             }
@@ -68,6 +112,7 @@ function Player(x, y) {
             }
             self.sprite.style.top = self.y + 'px'
         }
-    }}
+    }
+}
 
 export { Player }
