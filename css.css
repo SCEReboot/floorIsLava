@@ -5,10 +5,11 @@ padding: 0;}
 #board{width: 600px;
 height: 900px;
 background-color: rgb(0, 0, 0);
-margin: 40px auto;
+margin: 0 auto;
 position: relative;
 padding: 0;
 border-radius: 5px;
+overflow: hidden;
 }
 
 
@@ -28,4 +29,5 @@ border-radius: 5px;
     width: 100px;
     height:20px;
     position: absolute;
+    
 }

@@ -21,7 +21,13 @@ window.addEventListener('keydown', function (e) { //Cambiamos la direccion depen
             break
                 
         case 'w':
-            player1.jump()
+          
+            if (player1.onPlatform === true){
+                player1.onPlatform=false
+                  player1.jumping = true
+                 player1.speedY = -20
+            }
+            // player1.jump()
             break
 
     }
@@ -32,6 +38,7 @@ window.addEventListener('keydown', function (e) { //Cambiamos la direccion depen
 window.addEventListener("keyup", function (e) { //Quitamos direccion si dejamos de pulsar
     if (e.key === 'a' || e.key === 'd' || e.key === 'w') {
         player1.direction = 0
+        
 
     }
 })
@@ -49,14 +56,14 @@ function createplatform() {
   
 
 function loop () {
-    player1.collision(platforms)
+      for (let i = 0; i < platforms.length; i++) {
+        platforms[i].fallplatform();
+    }
+    player1.collision(platforms) 
     player1.moveX()
     player1.moveY()
     
-    
-    for (let i = 0; i < platforms.length; i++) {
-        platforms[i].fallplatform();
-    }
+  
     
     
 }
