@@ -4,9 +4,9 @@ function Platform (x,y,platforms){
     this.x = x
     this.y = y
     this.sprite
-    this.heightP = 20
-    this.widthP = 100 
-    this.speedY = 2
+    this.heightP = 10
+    this.widthP = 60 
+    this.speedY = 3.5
 
     this.insertPlatform = function () { //Funcion para crear  plataforma 
     var newPlatform = document.createElement("div")
@@ -19,18 +19,16 @@ function Platform (x,y,platforms){
     }
 
    this.fallplatform = function () {
-    if (self.y < 880 ) {
+    if (self.y < 1000 ) {
         
         self.y = self.y + self.speedY
-        self.sprite.style.top = self.y + 'px'; 
-        } else {
-            self.sprite.remove();
-            platforms.shift()
-        
-        }
-           
-        
-    }
+        self.sprite.style.top = self.y + 'px' 
+   }
+   
+}
+
+
+
 
 }
 
