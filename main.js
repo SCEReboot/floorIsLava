@@ -2,7 +2,7 @@ import { Player } from "./player.js"
 import { Platform } from "./platform.js"
 
 var board = document.getElementById("board")
-var firstplatform = new Platform(260,700)
+var firstplatform = new Platform(0,880,600)
 var player1 = new Player(274, 5);
  
 var platforms = []
@@ -48,8 +48,9 @@ window.addEventListener("keyup", function (e) { //Quitamos direccion si dejamos 
 function createplatform() {
   
 
-    var xRandom = Math.floor(Math.random() * 10) * 55   // versión arcade
-    var platform = new Platform(xRandom,0,platforms)
+    var xRandom = Math.floor(Math.random() * 10) * 55 
+    var wRandom = Math.floor(Math.random() * (80 - 40 + 1)+40)  // versión arcade
+    var platform = new Platform(xRandom,0,wRandom,platforms)
     platform.insertPlatform()
     platforms.push(platform)
     
@@ -65,16 +66,13 @@ function loop () {
     player1.moveX()
     player1.moveY()
     
-  
-    
-    
 }
 
 var timerId 
 var timerId2
 function start () {
     timerId = setInterval(loop,22)
-    timerId2 = setInterval(createplatform,1500)
+    timerId2 = setInterval(createplatform,1200)
 }
 
 
