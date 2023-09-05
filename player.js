@@ -5,8 +5,8 @@ function Player(x, y) {
     this.direction = 0
     this.sprite
     this.speed = 5 //velocidad de x
-    this.speedjump = 10
-    this.jumping = false
+    this.speedjump = 10;
+    this.jumping = false;
     this.speedY = 1
     this.gravity = 1
     this.height = 50
@@ -32,6 +32,51 @@ function Player(x, y) {
         }
         else if (self.x > 500) {
             self.x = 0
+        }
+    }
+
+    this.jump = function(platforms) {
+        self.speedY -1
+        self.Y = self.y - 200
+        self.sprite.style.top = self.y + 'px'
+        console.log(self.speedY)
+        self.falling = true
+
+    
+        this.collision = function (platfomrs) {
+        // s
+        }
+        
+        if (!self.jumping) { // Verificar si no estamos ya en medio de un salto
+            console.log("Estoy saltando");
+            self.jumping = true; // Marcamos que estamos en medio de un salto
+            let alturaSalto = 0;
+            let saltoInterval = setInterval(function() {
+                // Mueve el personaje hacia arriba (simulando un salto)
+                alturaSalto += 5; // Puedes ajustar la altura del salto cambiando este valor
+                self.sprite.style.bottom = alturaSalto + "px";
+                
+                if (alturaSalto >= 100) {
+                    clearInterval(saltoInterval);
+                    self.caer();
+                }
+            });
+        }
+    }
+
+    this.caer = function() {
+        if (self.jumping) { // Verificar si estamos en medio de un salto
+            let caidaInterval = setInterval(function() {
+                // Mueve el personaje hacia abajo (simulando la caída)
+                let alturaActual = parseInt(self.sprite.style.bottom);
+                if (alturaActual > 0) {
+                    alturaActual -= 5; // Puedes ajustar la velocidad de caída cambiando este valor
+                    self.sprite.style.bottom = alturaActual + "px";
+                } else {
+                    clearInterval(caidaInterval);
+                    self.jumping = false; // Marcar que hemos terminado el salto
+                }
+            }, 20);
         }
     }
 

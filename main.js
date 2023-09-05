@@ -21,13 +21,15 @@ window.addEventListener('keydown', function (e) { //Cambiamos la direccion depen
             break
                 
         case 'w':
-            player1.direction = -1
+            player1.jump()
             break
 
     }
 })
 
 
+
+    
 
 window.addEventListener("keyup", function (e) { //Quitamos direccion si dejamos de pulsar
     if (e.key === 'a' || e.key === 'd' || e.key === 'w') {
