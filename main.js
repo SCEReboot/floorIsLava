@@ -2,11 +2,12 @@ import { Player } from "./player.js"
 import { Platform } from "./platform.js"
 
 var board = document.getElementById("board")
-
-var player1 = new Player(200, 5);
+var firstplatform = new Platform(260,700)
+var player1 = new Player(274, 5);
  
 var platforms = []
 
+firstplatform.insertPlatform()
 
 player1.insertPlayer()// Ejecutamos la funcion que crea al jugador
 
@@ -59,6 +60,7 @@ function loop () {
       for (let i = 0; i < platforms.length; i++) {
         platforms[i].fallplatform();
     }
+    player1.firstcollision(firstplatform)
     player1.collision(platforms) 
     player1.moveX()
     player1.moveY()
@@ -71,7 +73,7 @@ function loop () {
 var timerId 
 var timerId2
 function start () {
-    timerId = setInterval(loop,30)
+    timerId = setInterval(loop,22)
     timerId2 = setInterval(createplatform,1500)
 }
 

@@ -4,13 +4,13 @@ function Player(x, y) {
     this.y = y
     this.direction = 0
     this.sprite
-    this.speed = 5 //velocidad de x
+    this.speed = 7 //velocidad de x
     this.speedjump = 10
     this.jumping = false
     this.speedY = 1
     this.gravity = 1.05
-    this.height = 50
-    this.width = 50
+    this.height = 30
+    this.width = 30
     this.falling = true
     this.onPlatform = true
 
@@ -28,40 +28,44 @@ function Player(x, y) {
         self.x = self.x + self.speed * self.direction
         self.sprite.style.left = self.x + 'px'
         if (self.x < 1) {
-            self.x = 500
+            self.x = 570
         }
-        else if (self.x > 500) {
-            self.x = 0
+        else if (self.x > 571) {
+            self.x = 2
         }
     }
 
     this.moveY = function () {
-        console.log(self.falling)
+      
 
 
         if (self.jumping === false) {
-            console.log("cualquier cosa")
+            
             self.fall()
         } else {
-            console.log("cualquier cosa 3")
+          
             self.jump()
         }
     }
 
     this.jump = function () {
-        
+       
         if (self.speedY < -3) {
             self.speedY *= 0.91
             self.y = self.y + self.speedY
             self.sprite.style.top = self.y + 'px'
+            if (self.y < 0) {
+                self.y = 0; // Limitar la posición Y mínima a 0
+                self.speedY = 0; // Detener el salto cuando alcanza la parte superior
+            }
         }
         else { 
             self.jumping = false
             self.falling = true
             self.speedY = 2
         }
-
     }
+  
 
     this.collision = function (platforms) {
         // platforms.forEach(platform => {
@@ -85,6 +89,30 @@ function Player(x, y) {
             }
         }
     }
+
+
+        this.firstcollision = function (firstplatform) {
+            if (
+                self.falling === true &&
+                self.y + self.height + self.speedY >= firstplatform.y && // Colisión con la plataforma solo cuando el player se encuentra por encima del eje y
+                self.x + self.width > firstplatform.x && // Colisión con la plataforma
+                self.x < firstplatform.x + firstplatform.widthP &&
+                self.y + self.height <= firstplatform.y + 1 &&
+                self.speedY >= 0 // Colisión con la plataforma en la siguiente posición para que no se pase tuvimos que añadir la velocidad
+            ) {
+                self.onPlatform = true;
+                self.speedY = 0; // Detener la velocidad vertical (caída)
+                self.falling = false;
+                self.y = firstplatform.y - self.height; // Alinear el jugador justo encima de la plataforma
+            } else {
+                self.falling = true;
+                self.onPlatform = false; // El jugador no está en la plataforma
+            }
+        }
+
+
+
+
 
     this.fall = function () {
 

@@ -4,9 +4,9 @@ function Platform (x,y,platforms){
     this.x = x
     this.y = y
     this.sprite
-    this.heightP = 20
-    this.widthP = 100 
-    this.speedY = 2
+    this.heightP = 10
+    this.widthP = 60 
+    this.speedY = 3.5
 
     this.insertPlatform = function () { //Funcion para crear  plataforma 
     var newPlatform = document.createElement("div")
